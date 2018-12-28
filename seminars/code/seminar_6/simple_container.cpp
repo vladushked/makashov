@@ -143,8 +143,32 @@ void simple_container::resize(int size)
     m_capacity = new_capacity;
 }
 
-
-simple_container& simple_container::operator= (const simple_container &container)
+// операторы
+simple_container& simple_container::operator = (const simple_container &container)
 {
+   if (this != &container)
+   {
+       if (m_data)          //проверка размера
+           delete [] m_data;
+       m_size = container.m_size;
+       m_capacity = container.m_capacity;
+       m_data = new double[m_capacity];
+       for (int i = 0; i<container.m_size; i++)
+           m_data[i] = container.m_data[i];
+       return *this;
+   }
+}
 
+simple_container& simple_container::operator + (const simple_container &container)
+{
+   if (this != &container)
+   {
+       if (m_data)          //проверка размера
+           delete [] m_data;
+       m_size = container.m_size;
+       m_capacity = container.m_capacity;
+       m_data = new double[m_capacity];
+       for (int i = 0; i<container.m_size; i++)
+           m_data[i] = container.m_data[i];
+   }
 }
